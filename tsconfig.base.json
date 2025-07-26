@@ -1,0 +1,23 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/shared" },
+    { "path": "packages/frontend" },
+    { "path": "packages/server" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "shared/*": ["packages/shared/src/*"]
+    },
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+
+    "composite": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true
+  }
+}

@@ -15,9 +15,10 @@
 
 ## TODOs
 
-- [ ] Set up project
-- [ ] Get server and DB set up
-- [ ] Get frontend set up
+- [x] Set up project
+- [x] Get server
+- [ ] get DB set up
+- [x] Get frontend set up
 - [ ] Set up tests
 - [ ] Set up APIs
   - [ ] login

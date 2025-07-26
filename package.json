@@ -1,12 +1,24 @@
 {
   "name": "checkpoint",
   "description": "- Frontend   - React + TS   - React Router   - Vite - Backend   - NodeJS + TS   - Fastify   - Mongodb",
-  "workspaces": [],
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Mathew Paul",
-  "license": "MIT"
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:frontend": "npm run dev --workspace=packages/frontend",
+    "dev:server": "npm run dev --workspace=packages/server",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:server\"",
+    "test": "vitest --workspace"
+  },
+  "dependencies": {
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "vitest": "^3.2.4"
+  }
 }
