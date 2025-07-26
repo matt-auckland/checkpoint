@@ -1,0 +1,12 @@
+{
+  "name": "checkpoint",
+  "description": "- Frontend   - React + TS   - React Router   - Vite - Backend   - NodeJS + TS   - Fastify   - Mongodb",
+  "workspaces": [],
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mathew Paul",
+  "license": "MIT"
+}
