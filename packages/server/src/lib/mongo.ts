@@ -7,6 +7,7 @@ import {
   ObjectId,
   type DeleteResult,
   type UpdateResult,
+  type InsertOneResult,
 } from 'mongodb';
 import * as dotenv from 'dotenv';
 
@@ -56,18 +57,25 @@ class CollectionWrapper {
     return await this.collection.find({}).toArray();
   }
 
-  async getSingleDocument(id: string): Promise<WithId<Document> | null> {
+  async getDocument(id: string | ObjectId): Promise<WithId<Document> | null> {
     return await this.collection.findOne({ _id: new ObjectId(id) });
   }
 
-  async patchDocument(id: string, newData: any): Promise<UpdateResult> {
+  async updateDocument(
+    id: string | ObjectId,
+    newData: any
+  ): Promise<UpdateResult> {
     return await this.collection.updateOne(
       { _id: new ObjectId(id) },
       { $set: newData }
     );
   }
 
-  async deleteDocument(id: string): Promise<DeleteResult> {
+  async deleteDocument(id: string | ObjectId): Promise<DeleteResult> {
     return await this.collection.deleteOne({ _id: new ObjectId(id) });
+  }
+
+  async createDocument(documentData: any): Promise<InsertOneResult> {
+    return await this.collection.insertOne(documentData);
   }
 }

@@ -1,13 +1,42 @@
+import type { ObjectId } from 'mongodb';
 import type { StandupEntry } from './StandupTypes';
 
 export type Team = {
-  _id: string;
+  _id: ObjectId;
   name: string;
-  memberIds: string[];
-  standupHistory?: StandUpHistory;
-  latestCheckIns?: StandupEntry[];
+  memberIds: ObjectId[];
+  standupHistory: StandUpHistory;
+  latestCheckIns: StandupEntry[];
 };
 
+export type NewTeamData = Omit<Team, '_id'>;
+
+// We don't direct editing of standupHistory or latestCheckIns
+// as we automically update these based on various operations
+export type TeamPatchData = Omit<
+  Team,
+  'standupHistory' | 'latestCheckIns' | '_id'
+>;
+
 type StandUpHistory = {
-  [date: string]: StandupEntry[];
+  [date: string]: string;
+};
+
+export type TeamGetSingleAPI = {
+  Params: {
+    id: string;
+  };
+};
+
+export type TeamPatchSingleAPI = {
+  Params: {
+    id: ObjectId;
+    patchData: TeamPatchData;
+  };
+};
+
+export type TeamPostAPI = {
+  Params: {
+    memberId: ObjectId;
+  };
 };

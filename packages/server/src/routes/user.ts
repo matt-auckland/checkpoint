@@ -27,7 +27,7 @@ export function userApiRoutes(fastify: FastifyInstance) {
 
       const { id } = request.params;
 
-      return (await collections.user.getSingleDocument(id)) as User;
+      return (await collections.user.getDocument(id)) as User;
     } catch (err) {
       console.error(err);
       reply.status(500).send(err);
@@ -43,7 +43,7 @@ export function userApiRoutes(fastify: FastifyInstance) {
 
       const { id, patchData } = request.params;
 
-      return await collections.user.patchDocument(id, patchData);
+      return await collections.user.updateDocument(id, patchData);
     } catch (err) {
       console.error(err);
       reply.status(500).send(err);
