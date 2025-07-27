@@ -3,7 +3,7 @@ import { useAuth } from '~/context/AuthContext';
 import './home.css';
 import { AppButton } from '~/components/AppButton';
 import { teamAPI } from '~/lib/api/teamAPI';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import type { TeamLite } from 'shared';
 
 export function meta({}: Route.MetaArgs) {
@@ -48,7 +48,11 @@ export default function Home() {
         <h2>My Teams</h2>
         <ul>
           {user?.teams.map((team) => {
-            return <li> {team.name} </li>;
+            return (
+              <li>
+                <Link to={`/team/${team._id.toString()}`}>{team.name}</Link>
+              </li>
+            );
           })}
         </ul>
         <AppButton onClick={createNewTeam}>Create a new team</AppButton>
