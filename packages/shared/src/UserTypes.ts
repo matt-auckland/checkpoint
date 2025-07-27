@@ -22,3 +22,9 @@ export type UserGetSingleApi = {
     id: string;
   };
 };
+
+export type UserPatchSingleApi = {
+  Params: {
+    id: string;
+  };
+};
