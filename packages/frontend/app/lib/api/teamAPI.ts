@@ -1,4 +1,9 @@
-import type { Team, TeamCreateAPI, TeamUpdateSingleAPI } from 'shared';
+import type {
+  Team,
+  TeamCreateAPI,
+  TeamUpdateSingleAPI,
+  UserLite,
+} from 'shared';
 import { api } from './api';
 
 export const teamAPI = {
@@ -12,8 +17,8 @@ export const teamAPI = {
         method: 'PATCH',
         body: data,
       }) as Promise<Team>,
-    createTeam: (userId: string) => {
-      const body: TeamCreateAPI['Body'] = { userId };
+    createTeam: (user: UserLite) => {
+      const body: TeamCreateAPI['Body'] = { user };
       return api(`/team/`, {
         method: 'POST',
         body,

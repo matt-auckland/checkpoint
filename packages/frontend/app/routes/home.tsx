@@ -4,7 +4,7 @@ import './home.css';
 import { AppButton } from '~/components/AppButton';
 import { teamAPI } from '~/lib/api/teamAPI';
 import { Link, useNavigate } from 'react-router';
-import type { TeamLite } from 'shared';
+import type { TeamLite, UserLite } from 'shared';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -22,8 +22,14 @@ export default function Home() {
   const navigate = useNavigate();
   const createNewTeam = () => {
     if (!user?._id) return;
+
+    const userData: UserLite = {
+      _id: user._id.toString(),
+      fullName: user.fullName,
+    };
+
     teamAPI.one
-      .createTeam(user._id.toString())
+      .createTeam(userData)
       .then((newTeam) => {
         const { name, _id } = newTeam;
         const teamLite: TeamLite = {
@@ -49,7 +55,7 @@ export default function Home() {
         <ul>
           {user?.teams.map((team) => {
             return (
-              <li>
+              <li key={team._id.toString()}>
                 <Link to={`/team/${team._id.toString()}`}>{team.name}</Link>
               </li>
             );

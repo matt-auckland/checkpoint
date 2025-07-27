@@ -26,6 +26,10 @@ export type StandupEntryFull = StandupEntryBase & {
   _id: ObjectId | string;
 };
 
+export type StandupEntryWithName = StandupEntryFull & {
+  fullName: string;
+};
+
 export type NewStandupEntry = Omit<StandupEntryBase, 'date'>;
 
 export type StandupGetSingleAPI = {

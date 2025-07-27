@@ -74,13 +74,13 @@ export function teamApiRoutes(fastify: FastifyInstance) {
         return;
       }
 
-      const { userId } = request.body;
+      const { user } = request.body;
       const randomTeamName: string = uniqueNamesGenerator({
         dictionaries: [adjectives, colors, animals],
       });
 
       const newTeam: NewTeamData = {
-        memberIds: [userId.toString()],
+        members: [user],
         name: randomTeamName,
         standupHistory: {},
         latestCheckIns: [],

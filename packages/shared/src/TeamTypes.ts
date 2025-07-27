@@ -5,14 +5,14 @@ import type { UserLite } from './UserTypes';
 export type Team = {
   _id: ObjectId | string;
   name: string;
-  memberIds: UserLite[];
+  members: UserLite[];
   standupHistory: StandUpHistory;
   latestCheckIns: StandupEntryFull[];
 };
 
 export type TeamLite = Omit<
   Team,
-  'memberIds' | 'standupHistory' | 'latestCheckIns'
+  'members' | 'standupHistory' | 'latestCheckIns'
 >;
 
 export type NewTeamData = Omit<Team, '_id'>;
@@ -45,6 +45,6 @@ export type TeamUpdateSingleAPI = {
 
 export type TeamCreateAPI = {
   Body: {
-    userId: ObjectId | string;
+    user: UserLite;
   };
 };
