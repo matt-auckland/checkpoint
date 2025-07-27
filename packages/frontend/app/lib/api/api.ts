@@ -20,7 +20,7 @@ export async function api<T>(
   });
 
   if (auth) {
-    const token = localStorage.getItem('auth_token');
+    const token = undefined; //get token from..
     if (token) finalHeaders.set('Authorization', `Bearer ${token}`);
   }
 
