@@ -17,7 +17,7 @@ export function userApiRoutes(fastify: FastifyInstance) {
       reply.status(500).send(err);
     }
   });
-
+  //single user
   fastify.get<UserGetSingleApi>('/user/:id', async (request, reply) => {
     try {
       if (!collections.user) {
@@ -33,11 +33,11 @@ export function userApiRoutes(fastify: FastifyInstance) {
       reply.status(500).send(err);
     }
   });
-
+  // update a user
   fastify.patch<UserPatchSingleApi>('/user/:id', async (request, reply) => {
     try {
       if (!collections.user) {
-        reply.status(500).send('Unable to get user');
+        reply.status(500).send('Unable to update user');
         return;
       }
 
