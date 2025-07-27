@@ -4,8 +4,8 @@ import type {
   NewTeamData,
   Team,
   TeamGetSingleAPI,
-  TeamPatchSingleAPI,
-  TeamPostAPI,
+  TeamUpdateSingleAPI,
+  TeamCreateAPI,
 } from 'shared';
 import {
   uniqueNamesGenerator,
@@ -49,7 +49,7 @@ export function teamApiRoutes(fastify: FastifyInstance) {
   });
 
   // update a teams members or name
-  fastify.patch<TeamPatchSingleAPI>('/team/:id', async (request, reply) => {
+  fastify.patch<TeamUpdateSingleAPI>('/team/:id', async (request, reply) => {
     try {
       if (!collections.team) {
         reply.status(500).send('Unable to update team');
@@ -66,7 +66,7 @@ export function teamApiRoutes(fastify: FastifyInstance) {
     }
   });
 
-  fastify.post<TeamPostAPI>('/team/', async (request, reply) => {
+  fastify.post<TeamCreateAPI>('/team/', async (request, reply) => {
     try {
       if (!collections.team) {
         reply.status(500).send('Unable to create team');

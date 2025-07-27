@@ -24,6 +24,8 @@ export type AuthSignupAPI = {
   };
 };
 
+export type AuthSignUpResponseBody = AuthLoginResponseBody;
+
 export type AuthHeaders = {
   Authorization: string;
 };

@@ -13,7 +13,7 @@ export type NewTeamData = Omit<Team, '_id'>;
 
 // We don't direct editing of standupHistory or latestCheckIns
 // as we automically update these based on various operations
-export type TeamPatchData = Omit<
+export type TeamUpdateData = Omit<
   Team,
   'standupHistory' | 'latestCheckIns' | '_id'
 >;
@@ -28,16 +28,16 @@ export type TeamGetSingleAPI = {
   };
 };
 
-export type TeamPatchSingleAPI = {
+export type TeamUpdateSingleAPI = {
   Params: {
     id: ObjectId;
   };
   Body: {
-    patchData: TeamPatchData;
+    patchData: TeamUpdateData;
   };
 };
 
-export type TeamPostAPI = {
+export type TeamCreateAPI = {
   Params: {
     memberId: ObjectId;
   };

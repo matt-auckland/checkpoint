@@ -19,13 +19,15 @@ export type UserSettings = {
 };
 
 //UserApis
-export type UserGetSingleApi = {
+export type UserGetSingleAPI = {
   Params: {
     id: string;
   };
 };
 
-export type UserUpdateSingleApi = {
+export type UserGetSingleAPIResponse = User;
+
+export type UserUpdateSingleAPI = {
   Params: {
     id: string;
   };
