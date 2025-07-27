@@ -1,0 +1,25 @@
+main {
+  text-align: center;
+}
+
+form {
+  max-width: 500px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  label {
+    font-size: 1.5rem;
+  }
+
+  input {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 0.5rem;
+  }
+
+  a {
+    text-align: center;
+  }
+}
