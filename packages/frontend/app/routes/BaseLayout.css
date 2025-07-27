@@ -1,0 +1,16 @@
+main {
+  border: 3px solid black;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  flex-grow: 1;
+  padding: 0.5rem;
+  .page-title {
+    text-align: left;
+    .punch-line {
+      height: 3px;
+      border-radius: 3px;
+      width: 90%;
+      background: chartreuse;
+    }
+  }
+}
