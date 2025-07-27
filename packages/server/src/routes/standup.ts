@@ -59,7 +59,7 @@ export function standupApiRoutes(fastify: FastifyInstance) {
         );
       } else {
         // returning a 404 if the stand up is not found would be nice
-        return (await collections.standup.getDocument(id)) as Standup;
+        return (await collections.standup.getDocumentById(id)) as Standup;
       }
     } catch (err) {
       console.error(err);

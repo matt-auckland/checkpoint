@@ -41,7 +41,7 @@ export function teamApiRoutes(fastify: FastifyInstance) {
 
       const { id } = request.params;
 
-      return (await collections.team.getDocument(id)) as Team;
+      return (await collections.team.getDocumentById(id)) as Team;
     } catch (err) {
       console.error(err);
       reply.status(500).send(err);

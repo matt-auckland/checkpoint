@@ -27,7 +27,7 @@ export function userApiRoutes(fastify: FastifyInstance) {
 
       const { id } = request.params;
 
-      return (await collections.user.getDocument(id)) as User;
+      return (await collections.user.getDocumentById(id)) as User;
     } catch (err) {
       console.error(err);
       reply.status(500).send(err);
