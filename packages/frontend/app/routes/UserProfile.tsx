@@ -3,6 +3,7 @@ import { Welcome } from '../welcome/welcome';
 import { authAPI } from '~/lib/api/authAPI';
 import { useAuth } from '~/context/AuthContext';
 import { useNavigate } from 'react-router';
+import { AppButton } from '~/components/AppButton';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -34,7 +35,7 @@ export default function UserProfileRoute() {
 
   return (
     <>
-      <button onClick={handleLogOut}>Log Out ):</button>
+      <AppButton onClick={handleLogOut}>Log Out ):</AppButton>
     </>
   );
 }
