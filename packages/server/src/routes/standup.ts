@@ -7,7 +7,6 @@ import type {
   StandupCreateStandupAPI,
   StandupEntryBase,
   StandupGetSingleAPI,
-  StandupPostAPI,
   StandupUpdateEntryAPI,
 } from 'shared';
 

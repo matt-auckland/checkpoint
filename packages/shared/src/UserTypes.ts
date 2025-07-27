@@ -11,6 +11,8 @@ export type User = {
   standupHistory?: StandupEntryFull[];
 };
 
+export type NewUser = Omit<User, '_id'>;
+
 export type UserSettings = {
   colorMode: 'system' | 'dark' | 'light';
   colorTheme: 'default';

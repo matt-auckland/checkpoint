@@ -1,12 +1,12 @@
 import { type FastifyInstance } from 'fastify';
-import { teamApiRoutes } from './team.ts';
-import { userApiRoutes } from './user.ts';
-import { authApiRoutes } from './auth.ts';
-import { standupApiRoutes } from './standup.ts';
+import { teamApiRoutes as teamAPIRoutes } from './team.ts';
+import { userApiRoutes as userAPIRoutes } from './user.ts';
+import { authAPIRoutes } from './auth.ts';
+import { standupApiRoutes as standupAPIRoutes } from './standup.ts';
 
 export function apiRoutes(fastify: FastifyInstance) {
-  fastify.register(teamApiRoutes);
-  fastify.register(userApiRoutes);
-  fastify.register(standupApiRoutes);
-  fastify.register(authApiRoutes);
+  fastify.register(teamAPIRoutes);
+  fastify.register(userAPIRoutes);
+  fastify.register(standupAPIRoutes);
+  fastify.register(authAPIRoutes);
 }
