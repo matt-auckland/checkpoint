@@ -63,8 +63,24 @@ class CollectionWrapper {
     return await this.collection.find({}).toArray();
   }
 
-  async getDocument(id: string | ObjectId): Promise<WithId<Document> | null> {
-    return await this.collection.findOne({ _id: new ObjectId(id) });
+  async getDocumentById(
+    id: string | ObjectId
+  ): Promise<WithId<Document> | null> {
+    return await this.getDocumentByField('_id', new ObjectId(id));
+  }
+
+  async getDocumentByField(
+    fieldName: string,
+    fieldValue: any
+  ): Promise<WithId<Document> | null> {
+    return await this.collection.findOne({ [fieldName]: fieldValue });
+  }
+
+  async getDocumentsByField(
+    fieldName: string,
+    fieldValue: any
+  ): Promise<WithId<Document>[]> {
+    return await this.collection.find({ [fieldName]: fieldValue }).toArray();
   }
 
   async updateDocument(
