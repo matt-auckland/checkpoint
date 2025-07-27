@@ -1,13 +1,13 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 import type { User } from 'shared';
-import { setAuthToken } from '~/lib/tokenStorage';
+import { clearAuthToken, setAuthToken } from '~/lib/tokenStorage';
 
 type AuthContextType = {
   token: string | null;
   user: User | null;
   setUser: (user: User | null) => void;
   setToken: (newToken: string | null) => void;
-  clearAuthToken: () => void;
+  clearData: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -21,9 +21,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setToken(newToken);
   };
 
-  const clearAuthToken = () => {
+  const clearData = () => {
     clearAuthToken();
     setToken(null);
+    setUser(null);
   };
 
   return (
@@ -33,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser,
         token,
         setToken: updateAuthToken,
-        clearAuthToken,
+        clearData,
       }}
     >
       {children}

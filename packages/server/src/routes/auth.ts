@@ -104,7 +104,7 @@ export async function authAPIRoutes(fastify: FastifyInstance) {
 
   fastify.post<AuthLogoutAPI>('/logout', async (request, reply) => {
     console.log('pretending we logged out user, revoked JWT');
-    return;
+    return true;
   });
 }
 

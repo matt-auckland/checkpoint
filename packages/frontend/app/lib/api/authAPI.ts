@@ -24,6 +24,11 @@ export const authAPI = {
     },
   },
   logout: {
-    post: () => api('/auth/logout', { method: 'POST' }),
+    post: () => {
+      return api('/auth/logout', {
+        method: 'POST',
+        body: {},
+      }) as Promise<boolean>;
+    },
   },
 };
