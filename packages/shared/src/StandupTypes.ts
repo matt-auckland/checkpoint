@@ -37,16 +37,16 @@ export type StandupGetSingleAPI = {
   };
 };
 
-// export type StandupPatchSingleAPI = {
-//   Params: {
-//     id: string;
-//     patchData: StandupPatchData;
-//   };
-// };
-
-export type StandupPostAPI = {
+export type StandupCreateStandupAPI = {
   Params: {
-    teamId: ObjectId | string;
+    teamId: string;
+    entry: NewStandupEntry;
+  };
+};
+
+export type StandupCreateEntryAPI = {
+  Params: {
+    standupId: string;
     entry: NewStandupEntry;
   };
 };

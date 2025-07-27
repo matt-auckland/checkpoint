@@ -3,9 +3,12 @@ import { collections } from '../lib/mongo.ts';
 import type {
   NewStandupData,
   Standup,
+  StandupCreateEntryAPI,
+  StandupCreateStandupAPI,
   StandupEntryBase,
   StandupGetSingleAPI,
   StandupPostAPI,
+  StandupUpdateEntryAPI,
 } from 'shared';
 
 import { env } from 'process';
@@ -65,7 +68,8 @@ export function standupApiRoutes(fastify: FastifyInstance) {
   });
 
   // if no stand up exists for this date, we create a new stand up and submit the entry
-  fastify.post<StandupPostAPI>('/standup/', async (request, reply) => {
+  // return new stand up with aggregation
+  fastify.post<StandupCreateStandupAPI>('/standup/', async (request, reply) => {
     try {
       if (!collections.standup || !collections.standupEntry) {
         reply.status(500).send('Unable to create standup');
@@ -102,4 +106,62 @@ export function standupApiRoutes(fastify: FastifyInstance) {
       reply.status(500).send(err);
     }
   });
+
+  // insert new entry, return updated stand up with aggregation
+  fastify.post<StandupCreateEntryAPI>(
+    '/standup/:id/entry',
+    async (request, reply) => {
+      try {
+        if (!collections.standup || !collections.standupEntry) {
+          reply.status(500).send('Unable to create standup');
+          return;
+        }
+
+        const { standupId, entry } = request.params;
+
+        const newEntry: StandupEntryBase = {
+          ...entry,
+          standupId,
+          date: new Date(),
+        };
+
+        // create new stand up entry
+        await collections.standupEntry.createDocument(newEntry);
+
+        return await collections.standup.getDocumentWithAggregation(
+          standupId,
+          standupEntriesAggregatePipeline
+        );
+      } catch (err) {
+        console.error(err);
+        reply.status(500).send(err);
+      }
+    }
+  );
+
+  // insert new entry, return updated stand up with aggregation
+  fastify.patch<StandupUpdateEntryAPI>(
+    '/standup/:id/entry',
+    async (request, reply) => {
+      try {
+        if (!collections.standup || !collections.standupEntry) {
+          reply.status(500).send('Unable to create standup');
+          return;
+        }
+
+        const { entry } = request.params;
+
+        // create new stand up entry
+        await collections.standupEntry.updateDocument(entry._id, entry);
+
+        return await collections.standup.getDocumentWithAggregation(
+          entry.standupId,
+          standupEntriesAggregatePipeline
+        );
+      } catch (err) {
+        console.error(err);
+        reply.status(500).send(err);
+      }
+    }
+  );
 }
