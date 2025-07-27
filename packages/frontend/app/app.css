@@ -15,3 +15,120 @@ body {
   padding: 0;
   margin: 0;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+html,
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  color: var(--text-color);
+  background-color: var(--secondary-bg);
+}
+
+a,
+a:has(:hover, :focus, :visited) {
+  text-decoration: underline;
+  text-decoration-color: var(--punch-color);
+  color: var(--text-color);
+}
+
+:root {
+  --border-color: #cccccc; /* neutral gray border */
+  --border-color-secondary: #dddddd; /* slightly lighter gray border */
+  --text-color: #222222; /* standard dark text */
+  --punch-color: #35c1f4; /* soft blue accent */
+  --gradient-start-color: #ffffff; /* white gradient start */
+  --gradient-end-color: #f2f2f2; /* very light gray end */
+
+  --primary-bg: #ffffff; /* white background */
+  --secondary-bg: #f9f9f9; /* subtle off-white panel */
+
+  .eva-theme {
+    --border-color: #6c3b9c; /* purple: Unit-01 armor */
+    --border-color-secondary: #7e54b1; /* subtler purple */
+    --text-color: #ffffff; /* white text */
+    --punch-color: #39ff14; /* LCL green / energy glow */
+    --gradient-start-color: #6c3b9c; /* Unit-01 purple */
+    --gradient-end-color: #39ff14; /* green glow */
+
+    --primary-bg: #1a1a2e; /* deep navy background */
+    --secondary-bg: #232946; /* darker violet/blue */
+  }
+
+  .gundam-theme {
+    --border-color: #e60000; /* Gundam red */
+    --border-color-secondary: #ff3333; /* lighter red */
+    --text-color: #ffffff; /* white text */
+    --punch-color: #ffd700; /* yellow accent (V-fin / shield) */
+    --gradient-start-color: #0f4c81; /* Gundam blue torso */
+    --gradient-end-color: #ffffff; /* white limbs/helmet */
+
+    --primary-bg: #0f0f0f; /* dark cockpit-style background */
+    --secondary-bg: #1e1e1e; /* slightly lighter for panels */
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border-color: #555555;
+    --border-color-secondary: #666666;
+    --text-color: #f0f0f0;
+    --punch-color: #66afe9;
+    --gradient-start-color: #1e1e1e;
+    --gradient-end-color: #2c2c2c;
+
+    --primary-bg: #121212;
+    --secondary-bg: #1e1e1e;
+  }
+
+  .eva-theme {
+    --border-color: #8646c4;
+    --border-color-secondary: #9a57d7;
+    --text-color: #ffffff;
+    --punch-color: #5eff5a;
+    --gradient-start-color: #8646c4;
+    --gradient-end-color: #5eff5a;
+
+    --primary-bg: #10101a;
+    --secondary-bg: #191931;
+  }
+
+  .gundam-theme {
+    --border-color: #cc3333;
+    --border-color-secondary: #e06666;
+    --text-color: #f8f8f8;
+    --punch-color: #ffe066;
+    --gradient-start-color: #1a3b5c;
+    --gradient-end-color: #cccccc;
+
+    --primary-bg: #0a0a0a;
+    --secondary-bg: #1a1a1a;
+  }
+}

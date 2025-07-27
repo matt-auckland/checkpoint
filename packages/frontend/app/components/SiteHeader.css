@@ -1,12 +1,12 @@
 .site-header {
   position: sticky;
   display: flex;
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid var(--border-color);
+  background-color: var(--bg-primary);
   padding: 0.5rem 1rem;
   align-items: center;
 
   .header-title {
-    text-decoration: none;
     font-size: 2rem;
     flex-grow: 1;
     font-weight: 600;
