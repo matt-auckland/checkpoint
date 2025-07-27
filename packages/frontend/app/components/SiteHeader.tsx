@@ -8,7 +8,7 @@ export function SiteHeader() {
     <>
       <header className="site-header">
         <Link to="/" className="header-title">
-          Check In ✅
+          Checkpoint ✅
         </Link>
 
         {isLoggedIn && <UserAvatar />}
