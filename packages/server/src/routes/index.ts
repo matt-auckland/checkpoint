@@ -8,5 +8,5 @@ export function apiRoutes(fastify: FastifyInstance) {
   fastify.register(teamAPIRoutes);
   fastify.register(userAPIRoutes);
   fastify.register(standupAPIRoutes);
-  fastify.register(authAPIRoutes);
+  fastify.register(authAPIRoutes, { prefix: 'auth' });
 }

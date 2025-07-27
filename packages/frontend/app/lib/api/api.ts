@@ -1,7 +1,7 @@
 import { getAuthToken } from '../tokenStorage';
 
 // TODO get API_BASE from env
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'http://localhost:3000/api';
 
 type RequestOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';

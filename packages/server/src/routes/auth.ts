@@ -41,7 +41,7 @@ export async function authAPIRoutes(fastify: FastifyInstance) {
       }
 
       console.log(
-        `Sign up ${email}, we ignore the password since this is a toy app 🙂`
+        `Attempting sign up for "${email}", we ignore the password since this is a toy app 🙂`
       );
 
       const userInsertData: NewUser = {
@@ -77,8 +77,16 @@ export async function authAPIRoutes(fastify: FastifyInstance) {
     const { email } = request.body;
 
     console.log(
-      `Log in ${email}, we ignore the password since this is a toy app 🙂`
+      `attempting log in for "${email}", we ignore the password since this is a toy app 🙂`
     );
+
+    if (!email) {
+      reply.status(400).send({
+        message: 'Missing email check your input.',
+        error: 'SignUpFail',
+      });
+    }
+
     const user = (await collections.user?.getDocumentByField(
       'email',
       email
