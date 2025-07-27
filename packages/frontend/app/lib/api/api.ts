@@ -1,3 +1,5 @@
+import { getAuthToken } from '../tokenStorage';
+
 // TODO get API_BASE from env
 const API_BASE = 'http://localhost:3000';
 
@@ -20,7 +22,7 @@ export async function api<T>(
   });
 
   if (auth) {
-    const token = undefined; //get token from..
+    const token = getAuthToken();
     if (token) finalHeaders.set('Authorization', `Bearer ${token}`);
   }
 
