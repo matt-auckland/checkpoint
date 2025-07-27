@@ -1,5 +1,5 @@
 import type { ObjectId } from 'mongodb';
-import { type StandupEntry } from './StandupTypes';
+import { type StandupEntryFull } from './StandupTypes';
 
 export type User = {
   _id?: ObjectId;
@@ -7,8 +7,8 @@ export type User = {
   fullName: string;
   settings: UserSettings;
   teams: string[];
-  recentStandups?: StandupEntry[];
-  standupHistory?: StandupEntry[];
+  recentStandups?: StandupEntryFull[];
+  standupHistory?: StandupEntryFull[];
 };
 
 export type UserSettings = {

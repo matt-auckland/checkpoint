@@ -1,14 +1,52 @@
+import type { ObjectId } from 'mongodb';
+
 export type Standup = {
-  _id: string;
+  _id: ObjectId | string;
   team: string;
-  entries: StandupEntry[];
 };
 
-export type StandupEntry = {
-  _id: string;
+export type StandUpWithEntries = Standup & {
+  entries: StandupEntryFull[];
+};
+
+export type NewStandupData = {
+  team: string;
+};
+
+export type StandupEntryBase = {
   userId: string;
+  standupId: string;
+  date: Date;
   yesterday: string;
   today: string;
   blockers: string;
-  date: Date;
+};
+
+export type StandupEntryFull = StandupEntryBase & {
+  _id: ObjectId | string;
+};
+
+export type NewStandupEntry = Omit<StandupEntryBase, 'date'>;
+
+export type StandupGetSingleAPI = {
+  Params: {
+    id: string;
+  };
+  Querystring: {
+    full?: string | boolean;
+  };
+};
+
+// export type StandupPatchSingleAPI = {
+//   Params: {
+//     id: string;
+//     patchData: StandupPatchData;
+//   };
+// };
+
+export type StandupPostAPI = {
+  Params: {
+    teamId: ObjectId | string;
+    entry: NewStandupEntry;
+  };
 };

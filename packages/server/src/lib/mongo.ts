@@ -14,6 +14,7 @@ import * as dotenv from 'dotenv';
 type DbCollections = {
   user?: CollectionWrapper;
   standup?: CollectionWrapper;
+  standupEntry?: CollectionWrapper;
   team?: CollectionWrapper;
 };
 
@@ -39,6 +40,11 @@ export async function connectToDB(): Promise<void> {
 
     const standupCollection = db.collection(envData.STANDUP_COLLECTION_NAME);
     collections.standup = new CollectionWrapper(standupCollection);
+
+    const standupEntryCollection = db.collection(
+      envData.STANDUP_ENTRY_COLLECTION_NAME
+    );
+    collections.standupEntry = new CollectionWrapper(standupEntryCollection);
 
     console.log('connected to mongodb successfully');
   } catch (e) {
@@ -77,5 +83,14 @@ class CollectionWrapper {
 
   async createDocument(documentData: any): Promise<InsertOneResult> {
     return await this.collection.insertOne(documentData);
+  }
+
+  async getDocumentWithAggregation(
+    id: string | ObjectId,
+    pipeline: object[]
+  ): Promise<Document | null> {
+    const fullPipeline = [{ $match: { _id: new ObjectId(id) } }, ...pipeline];
+    const results = await this.collection.aggregate(fullPipeline).toArray();
+    return results[0] ?? null;
   }
 }

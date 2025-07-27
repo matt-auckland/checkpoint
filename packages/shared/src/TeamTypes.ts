@@ -1,12 +1,12 @@
 import type { ObjectId } from 'mongodb';
-import type { StandupEntry } from './StandupTypes';
+import type { StandupEntryFull } from './StandupTypes';
 
 export type Team = {
   _id: ObjectId;
   name: string;
   memberIds: ObjectId[];
   standupHistory: StandUpHistory;
-  latestCheckIns: StandupEntry[];
+  latestCheckIns: StandupEntryFull[];
 };
 
 export type NewTeamData = Omit<Team, '_id'>;
