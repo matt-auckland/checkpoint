@@ -6,8 +6,11 @@
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
-    "noEmit": false
+    "noEmit": false,
+    "module": "ESNext",
+    "moduleResolution": "bundler"
   },
+
   "include": ["src", "tests"],
   "extends": "../../tsconfig.base.json"
 }
