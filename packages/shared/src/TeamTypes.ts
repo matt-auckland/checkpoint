@@ -1,10 +1,11 @@
 import type { ObjectId } from 'mongodb';
 import type { StandupEntryFull } from './StandupTypes';
+import type { UserLite } from './UserTypes';
 
 export type Team = {
   _id: ObjectId | string;
   name: string;
-  memberIds: string[];
+  memberIds: UserLite[];
   standupHistory: StandUpHistory;
   latestCheckIns: StandupEntryFull[];
 };

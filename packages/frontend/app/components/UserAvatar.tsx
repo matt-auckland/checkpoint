@@ -1,10 +1,13 @@
 import { Link } from 'react-router';
 import './UserAvatar.css';
-import { useAuth } from '~/context/AuthContext';
+import type { User, UserLite } from 'shared';
 
-export function UserAvatar() {
-  const { user } = useAuth();
+type UserAvatarProps = {
+  user: User | UserLite;
+  showName?: boolean;
+};
 
+export function UserAvatar({ user, showName = false }: UserAvatarProps) {
   const firstName = user?.fullName.split(' ')[0];
   const profileInitials = user?.fullName
     .split(' ')
@@ -15,8 +18,8 @@ export function UserAvatar() {
   return (
     <Link to={`/user/${user?._id}`}>
       <div className="user-avatar">
-        <div className="avatar-circle">{profileInitials}</div>
-        <span className="user-first-name">{firstName}</span>
+        <span className="avatar-circle">{profileInitials}</span>
+        {showName && <span className="user-first-name">{firstName}</span>}
       </div>
     </Link>
   );

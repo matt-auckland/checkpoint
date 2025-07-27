@@ -4,7 +4,7 @@ import './SiteHeader.css';
 import { useAuth } from '~/context/AuthContext';
 
 export function SiteHeader() {
-  const user = useAuth();
+  const { user } = useAuth();
   const isLoggedIn = user;
   return (
     <>
@@ -13,13 +13,11 @@ export function SiteHeader() {
           Checkpoint ✅
         </Link>
 
-        {isLoggedIn && <UserAvatar />}
+        {isLoggedIn && <UserAvatar user={user} showName />}
       </header>
       <div>
-        <Link to={'/'}> Home</Link>
         <Link to={'/login'}>login</Link>
         <Link to={'/signup'}>signup</Link>
-        <Link to={'/user/123'}>user profile </Link>
         <Link to={'/team/123'}>team</Link>
         <Link to={'/team/123?date&userId'}>team standup</Link>
         <Link to={'/team/123/settings'}>team settings</Link>

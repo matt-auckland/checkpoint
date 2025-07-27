@@ -1,0 +1,34 @@
+.standup-entry {
+  max-width: 320px;
+  .top-section {
+    min-height: 2.5rem;
+    padding: 0.2rem 0.5rem;
+    display: flex;
+    /* align-items: ; */
+    /* justify-content: space-between; */
+    gap: 1rem;
+  }
+
+  main {
+    border: 3px solid var(--border-color-secondary);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    p {
+      margin: 0;
+      padding: 0.5rem;
+    }
+  }
+
+  .yesterday {
+    background-color: yellow;
+  }
+  .today {
+    background-color: greenyellow;
+  }
+  .blockers {
+    background-color: rgb(252, 92, 63);
+  }
+}

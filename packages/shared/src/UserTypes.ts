@@ -14,6 +14,11 @@ export type User = {
 
 export type NewUser = Omit<User, '_id'>;
 
+export type UserLite = {
+  _id: string;
+  fullName: string;
+};
+
 export type UserSettings = {
   colorMode: 'system' | 'dark' | 'light';
   colorTheme: 'default';
