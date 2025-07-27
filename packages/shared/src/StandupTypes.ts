@@ -40,19 +40,21 @@ export type StandupGetSingleAPI = {
 export type StandupCreateStandupAPI = {
   Params: {
     teamId: string;
-    entry: NewStandupEntry;
   };
+  Body: { entry: NewStandupEntry };
 };
 
 export type StandupCreateEntryAPI = {
   Params: {
     standupId: string;
+  };
+  Body: {
     entry: NewStandupEntry;
   };
 };
 
 export type StandupUpdateEntryAPI = {
-  Params: {
+  Body: {
     entry: StandupEntryFull;
   };
 };

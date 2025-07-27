@@ -1,6 +1,6 @@
 import { type FastifyInstance } from 'fastify';
 import { collections } from '../lib/mongo.ts';
-import type { User, UserGetSingleApi, UserPatchSingleApi } from 'shared';
+import type { User, UserGetSingleApi, UserUpdateSingleApi } from 'shared';
 
 export function userApiRoutes(fastify: FastifyInstance) {
   // all users
@@ -34,14 +34,15 @@ export function userApiRoutes(fastify: FastifyInstance) {
     }
   });
   // update a user
-  fastify.patch<UserPatchSingleApi>('/user/:id', async (request, reply) => {
+  fastify.patch<UserUpdateSingleApi>('/user/:id', async (request, reply) => {
     try {
       if (!collections.user) {
         reply.status(500).send('Unable to update user');
         return;
       }
 
-      const { id, patchData } = request.params;
+      const { id } = request.params;
+      const { patchData } = request.body;
 
       return await collections.user.updateDocument(id, patchData);
     } catch (err) {

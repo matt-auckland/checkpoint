@@ -56,7 +56,8 @@ export function teamApiRoutes(fastify: FastifyInstance) {
         return;
       }
 
-      const { id, patchData } = request.params;
+      const { id } = request.params;
+      const { patchData } = request.body;
 
       return await collections.team.updateDocument(id, patchData);
     } catch (err) {

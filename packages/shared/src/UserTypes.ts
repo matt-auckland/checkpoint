@@ -25,9 +25,11 @@ export type UserGetSingleApi = {
   };
 };
 
-export type UserPatchSingleApi = {
+export type UserUpdateSingleApi = {
   Params: {
     id: string;
+  };
+  Body: {
     patchData: User;
   };
 };

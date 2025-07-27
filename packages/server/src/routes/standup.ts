@@ -75,7 +75,8 @@ export function standupApiRoutes(fastify: FastifyInstance) {
         return;
       }
 
-      const { teamId, entry } = request.params;
+      const { teamId } = request.params;
+      const { entry } = request.body;
 
       const newStandupData: NewStandupData = {
         team: teamId.toString(),
@@ -116,7 +117,8 @@ export function standupApiRoutes(fastify: FastifyInstance) {
           return;
         }
 
-        const { standupId, entry } = request.params;
+        const { standupId } = request.params;
+        const { entry } = request.body;
 
         const newEntry: StandupEntryBase = {
           ...entry,
@@ -148,7 +150,7 @@ export function standupApiRoutes(fastify: FastifyInstance) {
           return;
         }
 
-        const { entry } = request.params;
+        const { entry } = request.body;
 
         // create new stand up entry
         await collections.standupEntry.updateDocument(entry._id, entry);

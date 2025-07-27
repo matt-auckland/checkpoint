@@ -31,6 +31,8 @@ export type TeamGetSingleAPI = {
 export type TeamPatchSingleAPI = {
   Params: {
     id: ObjectId;
+  };
+  Body: {
     patchData: TeamPatchData;
   };
 };
