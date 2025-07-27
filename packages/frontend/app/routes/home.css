@@ -1,0 +1,9 @@
+.homepage {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+
+  section {
+    min-width: 400px;
+  }
+}
