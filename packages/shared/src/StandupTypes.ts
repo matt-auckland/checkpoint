@@ -50,3 +50,9 @@ export type StandupCreateEntryAPI = {
     entry: NewStandupEntry;
   };
 };
+
+export type StandupUpdateEntryAPI = {
+  Params: {
+    entry: StandupEntryFull;
+  };
+};
