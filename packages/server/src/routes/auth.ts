@@ -5,6 +5,7 @@ import type {
   AuthLogoutAPI,
   AuthSignupAPI,
   NewUser,
+  TeamLite,
   User,
 } from 'shared';
 
@@ -86,11 +87,19 @@ export async function authAPIRoutes(fastify: FastifyInstance) {
         error: 'SignUpFail',
       });
     }
-
+    // If I had more time I'd consolidate these two queries into
+    // one nice query, and probably a util func
     const user = (await collections.user?.getDocumentByField(
       'email',
       email
     )) as User;
+
+    const teams = (await collections.team?.collection
+      .find({ memberIds: user._id?.toString() })
+      .project({ _id: 1, name: 1 })
+      .toArray()) as TeamLite[];
+
+    user.teams = teams;
 
     if (!user) {
       reply.code(500).send({

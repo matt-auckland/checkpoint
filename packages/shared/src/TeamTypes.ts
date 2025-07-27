@@ -2,12 +2,17 @@ import type { ObjectId } from 'mongodb';
 import type { StandupEntryFull } from './StandupTypes';
 
 export type Team = {
-  _id: ObjectId;
+  _id: ObjectId | string;
   name: string;
-  memberIds: ObjectId[];
+  memberIds: string[];
   standupHistory: StandUpHistory;
   latestCheckIns: StandupEntryFull[];
 };
+
+export type TeamLite = Omit<
+  Team,
+  'memberIds' | 'standupHistory' | 'latestCheckIns'
+>;
 
 export type NewTeamData = Omit<Team, '_id'>;
 
@@ -38,7 +43,7 @@ export type TeamUpdateSingleAPI = {
 };
 
 export type TeamCreateAPI = {
-  Params: {
-    memberId: ObjectId;
+  Body: {
+    userId: ObjectId | string;
   };
 };

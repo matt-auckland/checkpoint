@@ -48,7 +48,7 @@ export function teamApiRoutes(fastify: FastifyInstance) {
     }
   });
 
-  // update a teams members or name
+  // update a team's members or name
   fastify.patch<TeamUpdateSingleAPI>('/team/:id', async (request, reply) => {
     try {
       if (!collections.team) {
@@ -59,7 +59,8 @@ export function teamApiRoutes(fastify: FastifyInstance) {
       const { id } = request.params;
       const { patchData } = request.body;
 
-      return await collections.team.updateDocument(id, patchData);
+      await collections.team.updateDocument(id, patchData);
+      return await collections.team.getDocumentById(id);
     } catch (err) {
       console.error(err);
       reply.status(500).send(err);
@@ -73,19 +74,20 @@ export function teamApiRoutes(fastify: FastifyInstance) {
         return;
       }
 
-      const { memberId } = request.params;
+      const { userId } = request.body;
       const randomTeamName: string = uniqueNamesGenerator({
         dictionaries: [adjectives, colors, animals],
       });
 
       const newTeam: NewTeamData = {
-        memberIds: [memberId],
+        memberIds: [userId.toString()],
         name: randomTeamName,
         standupHistory: {},
         latestCheckIns: [],
       };
 
-      return await collections.team.createDocument(newTeam);
+      const res = await collections.team.createDocument(newTeam);
+      return await collections.team.getDocumentById(res.insertedId);
     } catch (err) {
       console.error(err);
       reply.status(500).send(err);

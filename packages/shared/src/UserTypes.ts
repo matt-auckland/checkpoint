@@ -1,12 +1,13 @@
 import type { ObjectId } from 'mongodb';
 import { type StandupEntryFull } from './StandupTypes';
+import type { Team, TeamLite } from './TeamTypes';
 
 export type User = {
   _id?: ObjectId;
   email: string;
   fullName: string;
   settings: UserSettings;
-  teams: string[];
+  teams: TeamLite[];
   recentStandups?: StandupEntryFull[];
   standupHistory?: StandupEntryFull[];
 };
@@ -22,6 +23,9 @@ export type UserSettings = {
 export type UserGetSingleAPI = {
   Params: {
     id: string;
+  };
+  Querystring?: {
+    full?: boolean;
   };
 };
 

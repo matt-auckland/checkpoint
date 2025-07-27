@@ -53,7 +53,7 @@ export async function connectToDB(): Promise<void> {
   }
 }
 class CollectionWrapper {
-  private collection: Collection;
+  public collection: Collection; //ideally this would be private?
 
   constructor(collection: Collection) {
     this.collection = collection;

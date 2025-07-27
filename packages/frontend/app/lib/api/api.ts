@@ -14,6 +14,9 @@ export async function api<T>(
   path: string,
   { method = 'GET', headers = {}, body, auth = true }: RequestOptions = {}
 ): Promise<T> {
+  if (method == 'POST' && !body) {
+    body = {};
+  }
   const url = `${API_BASE}${path}`;
 
   const finalHeaders = new Headers({
