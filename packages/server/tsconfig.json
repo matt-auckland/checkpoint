@@ -12,6 +12,6 @@
     "esModuleInterop": true
   },
   "references": [{ "path": "../shared" }],
-  "include": ["src", "tests"],
+  "include": ["src", "tests", "env.d.ts"],
   "extends": "../../tsconfig.base.json"
 }

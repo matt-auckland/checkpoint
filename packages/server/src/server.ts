@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 import { apiRoutes } from './routes/index.ts';
+import { connectToDB } from './lib/mongo.ts';
 
 const app = Fastify();
 await app.register(fastifyCors, {
@@ -8,6 +9,7 @@ await app.register(fastifyCors, {
   credentials: true, // if you're using cookies or auth headers
 });
 
+await connectToDB();
 app.register(apiRoutes, { prefix: '/api' });
 
 app.listen({ port: 3000 }, (err, address) => {
