@@ -1,18 +1,27 @@
 import Fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
+
+if (process.env.NODE_ENV !== 'production') {
+  const dotenv = await import('dotenv');
+  dotenv.config();
+}
+
 import { apiRoutes } from './routes/index.ts';
 import { connectToDB } from './lib/mongo.ts';
 
+const PORT = process.env.PORT || 3000;
+const frontendOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
+
 const app = Fastify();
 await app.register(fastifyCors, {
-  origin: 'http://localhost:5173', // replace with your Vite dev server
+  origin: frontendOrigin, // replace with your Vite dev server
   credentials: true, // if you're using cookies or auth headers
 });
 
 await connectToDB();
 app.register(apiRoutes, { prefix: '/api' });
 
-app.listen({ port: 3000 }, (err, address) => {
+app.listen({ port: PORT }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);

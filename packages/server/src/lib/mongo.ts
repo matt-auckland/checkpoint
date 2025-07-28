@@ -9,7 +9,6 @@ import {
   type UpdateResult,
   type InsertOneResult,
 } from 'mongodb';
-import * as dotenv from 'dotenv';
 
 type DbCollections = {
   user?: CollectionWrapper;
@@ -22,8 +21,6 @@ export const collections: DbCollections = {};
 
 export async function connectToDB(): Promise<void> {
   try {
-    dotenv.config();
-
     const envData = process.env;
 
     const uri = process.env.MONGO_DB_URI;
