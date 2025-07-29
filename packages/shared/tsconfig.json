@@ -11,6 +11,6 @@
     "moduleResolution": "bundler"
   },
 
-  "include": ["src", "tests"],
+  "include": ["src"],
   "extends": "../../tsconfig.base.json"
 }
