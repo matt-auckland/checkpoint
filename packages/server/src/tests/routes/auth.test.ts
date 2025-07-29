@@ -1,7 +1,8 @@
 import fastify, { type FastifyInstance } from 'fastify';
-import { authAPIRoutes, createJWTToken } from '../../src/routes/auth.ts';
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
-import { collections } from '../../src/lib/mongo.ts';
+import { collections } from '../../lib/mongo.ts';
+import { authAPIRoutes, createJWTToken } from '../../routes/auth.ts';
+import { getCollectionsMock } from '../testUtils.ts';
 
 describe('createJWTToken', () => {
   it('returns a (fake) string token with a number prefix', () => {
@@ -30,9 +31,9 @@ describe('Auth API', () => {
 
   describe('login API', async () => {
     it('returns token and user on success', async () => {
-      collections.user = {
+      collections.user = getCollectionsMock({
         getDocumentByField: vi.fn().mockResolvedValue({}), // empty obj is enough to count as a user in this case
-      };
+      });
       const response = await mockAPI.inject({
         method: 'POST',
         url: '/login',
@@ -58,14 +59,14 @@ describe('Auth API', () => {
 
   describe('signup API', async () => {
     it('returns token and user on success', async () => {
-      collections.user = {
+      collections.user = getCollectionsMock({
         getDocumentsByField: vi.fn().mockResolvedValue(null), // no existing users found
         getDocumentByField: vi.fn().mockResolvedValue({}), // empty obj is enough to count as a new user in this case
         createDocument: vi.fn().mockResolvedValue({
           acknowledged: true,
           insertedId: '123',
         }), // mock creation of user
-      };
+      });
       const response = await mockAPI.inject({
         method: 'POST',
         url: '/login',
@@ -79,7 +80,7 @@ describe('Auth API', () => {
     });
 
     it('returns 400 error if email is missing', async () => {
-      collections.user = {}; // pretend collection is defined
+      collections.user = getCollectionsMock(); // pretend collection is defined
       const response = await mockAPI.inject({
         method: 'POST',
         url: '/signup',
@@ -90,7 +91,7 @@ describe('Auth API', () => {
     });
 
     it('returns 400 error if fullName is missing', async () => {
-      collections.user = {}; // pretend collection is defined
+      collections.user = getCollectionsMock(); // pretend collection is defined
       const response = await mockAPI.inject({
         method: 'POST',
         url: '/signup',
@@ -101,9 +102,9 @@ describe('Auth API', () => {
     });
 
     it('returns 400 error if email is in use', async () => {
-      collections.user = {
+      collections.user = getCollectionsMock({
         getDocumentsByField: vi.fn().mockResolvedValue({}),
-      };
+      });
 
       const response = await mockAPI.inject({
         method: 'POST',

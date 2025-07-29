@@ -49,7 +49,7 @@ export async function connectToDB(): Promise<void> {
     console.error(e);
   }
 }
-class CollectionWrapper {
+export class CollectionWrapper {
   public collection: Collection; //ideally this would be private?
 
   constructor(collection: Collection) {
