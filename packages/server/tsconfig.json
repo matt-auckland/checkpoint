@@ -1,17 +1,9 @@
 {
-  "ts-node": {
-    "esm": true
-  },
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "allowImportingTsExtensions": true,
-    "esModuleInterop": true
+    "rootDir": "src"
   },
-  "references": [{ "path": "../shared" }],
-  "include": ["src", "tests", "env.d.ts"],
-  "extends": "../../tsconfig.base.json"
+  "include": ["src"],
+  "references": [{ "path": "../shared" }]
 }
