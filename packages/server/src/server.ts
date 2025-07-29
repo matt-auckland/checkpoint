@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 import { apiRoutes } from './routes/index.ts';
 import { connectToDB } from './lib/mongo.ts';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 const frontendOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
 
 const app = Fastify();

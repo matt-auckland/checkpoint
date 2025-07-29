@@ -19,27 +19,42 @@ type DbCollections = {
 
 export const collections: DbCollections = {};
 
+const dbDefaults = {
+  uri: '',
+  USER_COLLECTION_NAME: '',
+  TEAM_COLLECTION_NAME: '',
+  STANDUP_COLLECTION_NAME: '',
+  STANDUP_ENTRY_COLLECTION_NAME: '',
+};
+
 export async function connectToDB(): Promise<void> {
   try {
     const envData = process.env;
 
     const uri = process.env.MONGO_DB_URI;
     const dbName = process.env.DB_NAME;
-    const client = new MongoClient(uri);
+    const client = new MongoClient(uri || dbDefaults.uri);
     await client.connect();
 
     let db: Db = client.db(dbName);
-    const userCollection = db.collection(envData.USER_COLLECTION_NAME);
+    const userCollection = db.collection(
+      envData.USER_COLLECTION_NAME || dbDefaults.USER_COLLECTION_NAME
+    );
     collections.user = new CollectionWrapper(userCollection);
 
-    const teamCollection = db.collection(envData.TEAM_COLLECTION_NAME);
+    const teamCollection = db.collection(
+      envData.TEAM_COLLECTION_NAME || dbDefaults.TEAM_COLLECTION_NAME
+    );
     collections.team = new CollectionWrapper(teamCollection);
 
-    const standupCollection = db.collection(envData.STANDUP_COLLECTION_NAME);
+    const standupCollection = db.collection(
+      envData.STANDUP_COLLECTION_NAME || dbDefaults.STANDUP_COLLECTION_NAME
+    );
     collections.standup = new CollectionWrapper(standupCollection);
 
     const standupEntryCollection = db.collection(
-      envData.STANDUP_ENTRY_COLLECTION_NAME
+      envData.STANDUP_ENTRY_COLLECTION_NAME ||
+        dbDefaults.STANDUP_ENTRY_COLLECTION_NAME
     );
     collections.standupEntry = new CollectionWrapper(standupEntryCollection);
 
