@@ -1,9 +1,11 @@
 // import type { Route } from './+types/SignUp';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './signup.css';
 import { useAuth } from '../context/AuthContext.tsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { authAPI } from '../lib/api/authAPI.ts';
+import { AppButton } from '~/components/AppButton.tsx';
+import { usePageTitle } from '~/context/PageTitleContext.tsx';
 
 export default function SignUpRoute() {
   const navigate = useNavigate();
@@ -12,6 +14,12 @@ export default function SignUpRoute() {
   const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordTwo, setPasswordTwo] = useState('');
+
+  const { setTitle } = usePageTitle();
+
+  useEffect(() => {
+    setTitle('Sign Up');
+  }, [setTitle]);
 
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [formError, setFormError] = useState('');
@@ -95,9 +103,9 @@ export default function SignUpRoute() {
           value={passwordTwo}
           onChange={updatePassTwo}
         />
-        <button type="submit" disabled={isSigningUp}>
+        <AppButton type="submit" disabled={isSigningUp}>
           Sign up!
-        </button>
+        </AppButton>
         <Link to="/login">
           - Already have an account? Click here to log in -
         </Link>

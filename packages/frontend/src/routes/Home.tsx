@@ -4,10 +4,19 @@ import { AppButton } from '../components/AppButton';
 import { teamAPI } from '../lib/api/teamAPI';
 import { Link, useNavigate } from 'react-router-dom';
 import type { TeamLite, UserLite } from 'shared';
+import { usePageTitle } from '~/context/PageTitleContext';
+import { useEffect } from 'react';
 
 export default function Home() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
+  const { setTitle } = usePageTitle();
+
+  useEffect(() => {
+    const displayName = user?.fullName.split(' ')[0] || user?.fullName;
+    setTitle(`Welcome back ${displayName}`);
+  }, [setTitle, user]);
+
   const createNewTeam = () => {
     if (!user?._id) return;
 

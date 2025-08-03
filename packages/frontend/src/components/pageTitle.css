@@ -1,4 +1,5 @@
 .page-title {
+  margin-block-end: 2rem;
   h1 {
     display: inline-block;
   }

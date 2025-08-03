@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { UserAvatar } from './UserAvatar';
-import './SiteHeader.css';
+import './siteHeader.css';
 import { useAuth } from '../context/AuthContext';
 
 export function SiteHeader() {

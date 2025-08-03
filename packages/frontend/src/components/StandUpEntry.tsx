@@ -1,9 +1,9 @@
-import type { StandupEntryWithName, UserLite } from 'shared';
+import type { CheckInEntryWithName, UserLite } from 'shared';
 import { UserAvatar } from './UserAvatar';
 import './standupEntry.css';
 
 type StandUpEntryProps = {
-  entry: StandupEntryWithName;
+  entry: CheckInEntryWithName;
 };
 
 export function StandUpEntry({ entry }: StandUpEntryProps) {

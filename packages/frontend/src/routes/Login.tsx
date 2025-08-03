@@ -1,18 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './login.css';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { authAPI } from '../lib/api/authAPI';
+import { AppButton } from '~/components/AppButton';
+import { usePageTitle } from '~/context/PageTitleContext';
 
 export default function LoginRoute() {
   const navigate = useNavigate();
+  const { setTitle } = usePageTitle();
   const { setUser, setToken } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [formError, setFormError] = useState('');
+
+  useEffect(() => {
+    setTitle('Login');
+  }, [setTitle]);
 
   const updateEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
@@ -23,6 +29,7 @@ export default function LoginRoute() {
     e.preventDefault();
     setFormError('');
     setIsLoggingIn(true);
+
     //handle login
     authAPI.login
       .post({
@@ -55,9 +62,9 @@ export default function LoginRoute() {
           value={password}
           onChange={updatePass}
         />
-        <button type="submit" disabled={isLoggingIn}>
+        <AppButton type="submit" disabled={isLoggingIn}>
           Login!
-        </button>
+        </AppButton>
         <Link to="/signup">
           - If you don't have an account, click here to sign up -
         </Link>

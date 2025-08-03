@@ -1,15 +1,21 @@
-import type { ReactNode } from 'react';
 import './pageTitle.css';
+import type { ReactNode } from 'react';
+import { usePageTitle } from '~/context/PageTitleContext';
 
 type PageTitleProps = {
-  title: string;
   children?: ReactNode;
 };
 
-export function PageTitle({ title, children }: PageTitleProps) {
+export function PageTitle({ children }: PageTitleProps) {
+  const { title } = usePageTitle();
+
   return (
     <div className="page-title">
-      <h1>{title}</h1> {children}
+      <div>
+        {title && <h1>{title}</h1>}
+        {children}
+      </div>
+
       <div className="punch-line"></div>
     </div>
   );

@@ -3,16 +3,19 @@ import { Outlet } from 'react-router-dom';
 import './BaseLayout.css';
 import { SiteHeader } from '../components/SiteHeader';
 import { AuthProvider } from '../context/AuthContext';
+import { PageTitle } from '~/components/PageTitle';
+import { PageTitleProvider } from '~/context/PageTitleContext';
 
 export default function BaseLayout() {
-  // const matches = useMatches();
-  // const current = matches[matches.length - 1];
   return (
     <AuthProvider>
-      <SiteHeader />
-      <main className="base-layout">
-        <Outlet />
-      </main>
+      <PageTitleProvider>
+        <SiteHeader />
+        <main className="base-layout">
+          <PageTitle />
+          <Outlet />
+        </main>
+      </PageTitleProvider>
     </AuthProvider>
   );
 }

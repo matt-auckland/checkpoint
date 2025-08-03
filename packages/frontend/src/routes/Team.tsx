@@ -1,9 +1,45 @@
-import type { StandupEntryWithName, Team } from 'shared';
+import type { CheckInEntryWithName, Team } from 'shared';
 import { PageTitle } from '../components/PageTitle';
 import { StandUpEntry } from '../components/StandUpEntry';
 import './team.css';
+import { useSearchParams } from 'react-router-dom';
+import { usePageTitle } from '~/context/PageTitleContext';
+import { useEffect } from 'react';
+
+type TeamQueryParams = {
+  date?: string;
+  userId?: string;
+};
+
+function useTeamQueryParams(): [
+  TeamQueryParams,
+  (params: TeamQueryParams) => void
+] {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const values: TeamQueryParams = {
+    date: searchParams.get('date') ?? undefined,
+    userId: searchParams.get('userId') ?? undefined,
+  };
+
+  const setTypedSearchParams = (params: TeamQueryParams) => {
+    const newParams = new URLSearchParams();
+    if (params.date) newParams.set('date', params.date);
+    if (params.userId) newParams.set('userId', params.userId);
+    setSearchParams(newParams);
+  };
+
+  return [values, setTypedSearchParams];
+}
 
 export default function TeamRoute() {
+  const [{ date, userId }, setParams] = useTeamQueryParams();
+  const { setTitle } = usePageTitle();
+
+  useEffect(() => {
+    setTitle(`Team ${teamData.name}`);
+  }, [setTitle]);
+
   const teamData: Team = {
     _id: '123',
     members: [
@@ -44,7 +80,7 @@ export default function TeamRoute() {
     ],
   };
 
-  const latestCheckIns: StandupEntryWithName[] = teamData.latestCheckIns.map(
+  const latestCheckIns: CheckInEntryWithName[] = teamData.latestCheckIns.map(
     (checkIn) => {
       const user = teamData.members.find((user) => user._id == checkIn.userId);
       return {
@@ -54,11 +90,8 @@ export default function TeamRoute() {
     }
   );
 
-  const pageTitle = teamData.name;
-
   return (
     <div className="team-page">
-      <PageTitle title={pageTitle}> </PageTitle>
       {latestCheckIns.map((checkIn) => {
         return <StandUpEntry entry={checkIn} />;
       })}
