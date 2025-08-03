@@ -19,7 +19,6 @@ type TeamQueryParams = {
   date?: string;
 };
 
-//todo type
 function useTeamQueryParams() {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -52,12 +51,12 @@ export default function TeamRoute() {
   const { date } = useTeamQueryParams();
 
   useEffect(() => {
-    if (!team && teamId) {
+    if (!team && teamId && !isLoading) {
       loadTeamData(teamId, date);
       return;
     }
     setTitle(`Team ${team?.name || ''}`);
-    // if the user has checked in today disable check in button
+    // TODO if the user has checked in today disable check in button?
   }, [setTitle, team, teamId]);
 
   const loadTeamData = (teamId: string, date?: string) => {

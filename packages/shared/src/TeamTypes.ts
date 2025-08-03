@@ -48,6 +48,22 @@ export type TeamUpdateSingleAPI = {
   };
 };
 
+export type TeamUpdateAddUsersAPI = {
+  Params: {
+    teamId: string;
+  };
+  Body: {
+    UserIds: string[]
+  }
+};
+
+export type TeamDeleteUserAPI = {
+  Params: {
+    teamId: string;
+    userId: string
+  };
+};
+
 export type TeamCreateAPI = {
   Body: {
     user: UserLite;

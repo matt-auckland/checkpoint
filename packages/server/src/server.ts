@@ -14,8 +14,9 @@ const frontendOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
 
 const app = Fastify();
 await app.register(fastifyCors, {
-  origin: frontendOrigin, // replace with your Vite dev server
-  credentials: true, // if you're using cookies or auth headers
+  origin: frontendOrigin, 
+  credentials: true, 
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'], 
 });
 
 await connectToDB();

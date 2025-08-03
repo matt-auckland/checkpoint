@@ -20,16 +20,30 @@ export const teamAPI = {
       return api(url, { method: 'GET' }) as Promise<TeamDataFull>;
     },
 
-    updateTeam: (id: string, data: TeamUpdateSingleAPI['Body']) =>
-      api(`/team/${id}/entry`, {
+    updateTeam: (id: string, data: TeamUpdateSingleAPI['Body']) => {
+      return api(`/team/${id}`, {
         method: 'PATCH',
         body: data,
-      }) as Promise<Team>,
+      }) as Promise<Team>;
+    },
     createTeam: (user: UserLite) => {
       const body: TeamCreateAPI['Body'] = { user };
       return api(`/team/`, {
         method: 'POST',
         body,
+      }) as Promise<Team>;
+    },
+    deleteUser(userId: string, teamId: string) {
+      return api(`/team/${teamId}/member/${userId}`, {
+        method: 'DELETE',
+      }) as Promise<Team>;
+    },
+    addUsers(userIds: string[], teamId: string) {
+      return api(`/team/${teamId}/member/`, {
+        method: 'POST',
+        body: {
+          UserIds: userIds,
+        },
       }) as Promise<Team>;
     },
   },

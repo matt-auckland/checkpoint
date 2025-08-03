@@ -9,6 +9,9 @@ import type {
   CheckInFull,
   User,
   CheckInWithFullName,
+  TeamDeleteUserAPI,
+  TeamUpdateAddUsersAPI,
+  UserLite,
 } from 'shared';
 import {
   uniqueNamesGenerator,
@@ -107,6 +110,67 @@ export function teamApiRoutes(fastify: FastifyInstance) {
 
       await collections.team.updateDocument(id, patchData);
       return await collections.team.getDocumentById(id);
+    } catch (err) {
+      console.error(err);
+      reply.status(500).send(err);
+    }
+  });
+  
+  fastify.post<TeamUpdateAddUsersAPI>('/team/:teamId/member/', async (request, reply) => {
+    try {
+      if (!collections.team || !collections.user) {
+        reply.status(500).send('Unable to update team');
+        return;
+      }
+
+      const { teamId } = request.params;
+      const { UserIds } = request.body
+
+      const team = await collections.team.getDocumentById(teamId);
+      if (!team) {
+        reply.status(404).send('Team not found');
+        return;
+      }
+
+      // Filter out user IDs that are already in the team
+      const existingUserIds = new Set(team.members.map((m: UserLite) => m._id.toString()));
+      const newUserIds = UserIds.filter(id => !existingUserIds.has(id));
+
+      if (newUserIds.length === 0) {
+        return team;
+      }
+
+      // Lookup users by ID
+      const usersToAdd = await collections.user.collection
+        .find({ _id: { $in: newUserIds.map(id => new ObjectId(id)) } })
+        .toArray();
+
+      await collections.team.collection.updateOne(
+        { _id: new ObjectId(teamId) },
+        { $addToSet: { members: { $each: usersToAdd } } }
+      );
+
+      return await collections.team.getDocumentById(teamId);
+    } catch (err) {
+      console.error(err);
+      reply.status(500).send(err);
+    }
+  });
+
+  fastify.delete<TeamDeleteUserAPI>('/team/:teamId/member/:userId', async (request, reply) => {
+    try {
+      if (!collections.team) {
+        reply.status(500).send('Unable to update team');
+        return;
+      }
+
+      const { teamId, userId } = request.params;
+
+      await collections.team.collection.updateOne(
+        { _id: new ObjectId(teamId) },
+        { $pull: { members: { _id: new ObjectId(userId) } } } as any // quick type fix
+      );
+      return await collections.team.getDocumentById(teamId);
     } catch (err) {
       console.error(err);
       reply.status(500).send(err);
