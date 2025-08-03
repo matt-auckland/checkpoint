@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import './UserAvatar.css';
 import type { User, UserLite } from 'shared';
 

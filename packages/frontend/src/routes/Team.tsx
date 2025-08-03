@@ -1,15 +1,7 @@
-import type { Route } from './+types/Team';
-import type { StandupEntryWithName, Team, UserLite } from 'shared';
-import { PageTitle } from '~/components/PageTitle';
-import { StandUpEntry } from '~/components/StandUpEntry';
+import type { StandupEntryWithName, Team } from 'shared';
+import { PageTitle } from '../components/PageTitle';
+import { StandUpEntry } from '../components/StandUpEntry';
 import './team.css';
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: 'TEAMNAME' },
-    { name: 'description', content: 'Page for TEAMNAME' },
-  ];
-}
 
 export default function TeamRoute() {
   const teamData: Team = {

@@ -1,7 +1,7 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { UserAvatar } from './UserAvatar';
 import './SiteHeader.css';
-import { useAuth } from '~/context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 export function SiteHeader() {
   const { user } = useAuth();

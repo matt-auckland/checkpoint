@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 import type { User } from 'shared';
-import { clearAuthToken, setAuthToken } from '~/lib/tokenStorage';
+import { clearAuthToken, setAuthToken } from '../lib/tokenStorage';
 
 type AuthContextType = {
   token: string | null;

@@ -1,17 +1,9 @@
-import type { Route } from './+types/Login';
 import { useState } from 'react';
 import './login.css';
-import { useAuth } from '~/context/AuthContext.tsx';
-import { Link, useNavigate } from 'react-router';
-import { authAPI } from '~/lib/api/authAPI';
 
-export function meta({}: Route.MetaArgs) {
-  return [{ title: 'Login' }, { name: 'description', content: 'Login page' }];
-}
-
-export const handle = {
-  pageTitle: 'Login',
-};
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { authAPI } from '../lib/api/authAPI';
 
 export default function LoginRoute() {
   const navigate = useNavigate();

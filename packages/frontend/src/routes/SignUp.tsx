@@ -1,19 +1,9 @@
-import type { Route } from './+types/SignUp';
+// import type { Route } from './+types/SignUp';
 import { useState } from 'react';
 import './signup.css';
-import { useAuth } from '~/context/AuthContext.tsx';
-import { Link, useNavigate } from 'react-router';
-import { authAPI } from '~/lib/api/authAPI';
-
-import { Welcome } from '../welcome/welcome';
-
-export function meta({}: Route.MetaArgs) {
-  return [{ title: 'SignUp' }, { name: 'description', content: 'SignUp page' }];
-}
-
-export const handle = {
-  pageTitle: 'Sign Up',
-};
+import { useAuth } from '../context/AuthContext.tsx';
+import { Link, useNavigate } from 'react-router-dom';
+import { authAPI } from '../lib/api/authAPI.ts';
 
 export default function SignUpRoute() {
   const navigate = useNavigate();

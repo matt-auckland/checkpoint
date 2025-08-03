@@ -1,21 +1,9 @@
-import type { Route } from './+types/Home';
-import { useAuth } from '~/context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import './home.css';
-import { AppButton } from '~/components/AppButton';
-import { teamAPI } from '~/lib/api/teamAPI';
-import { Link, useNavigate } from 'react-router';
+import { AppButton } from '../components/AppButton';
+import { teamAPI } from '../lib/api/teamAPI';
+import { Link, useNavigate } from 'react-router-dom';
 import type { TeamLite, UserLite } from 'shared';
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: 'New React Router App' },
-    { name: 'description', content: 'Welcome to React Router!' },
-  ];
-}
-
-export const handle = {
-  pageTitle: 'Home',
-};
 
 export default function Home() {
   const { user, setUser } = useAuth();

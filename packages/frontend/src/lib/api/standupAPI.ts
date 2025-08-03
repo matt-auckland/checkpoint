@@ -1,8 +1,4 @@
-import type {
-  StandupCreateEntryAPI,
-  StandupCreateStandupAPI,
-  StandupUpdateEntryAPI,
-} from 'shared';
+import type { StandupCreateEntryAPI, StandupUpdateEntryAPI } from 'shared';
 import { api } from './api';
 
 export const standupAPI = {
@@ -15,7 +11,7 @@ export const standupAPI = {
       api(`/standup/${id}/entry`, { method: 'PATCH', body: data }),
     createEntry: (id: string, data: StandupCreateEntryAPI['Body']) =>
       api(`/standup/${id}/entry`, { method: 'POST', body: data }),
-    createStandup: (id: string, data: StandupCreateStandupAPI['Body']) =>
-      api(`/standup/`, { method: 'POST', body: data }),
+    // createStandup: (id: string, data: StandupCreateStandupAPI['Body']) =>
+    //   api(`/standup/`, { method: 'POST', body: data }),
   },
 };

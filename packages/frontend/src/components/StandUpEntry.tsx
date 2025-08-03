@@ -1,5 +1,5 @@
 import type { StandupEntryWithName, UserLite } from 'shared';
-import { UserAvatar } from '~/components/UserAvatar';
+import { UserAvatar } from './UserAvatar';
 import './standupEntry.css';
 
 type StandUpEntryProps = {
