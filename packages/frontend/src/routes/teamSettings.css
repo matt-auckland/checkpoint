@@ -1,0 +1,36 @@
+.team-settings-page {
+  > :first-child {
+    width: 100%;
+  }
+  display: flex;
+
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  header {
+    display: flex;
+    gap: 2rem;
+  }
+
+  section {
+    text-align: left;
+    min-width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    h2 {
+      width: 100%;
+    }
+  }
+
+  .team-members {
+    width: 100%;
+    text-align: left;
+    ul {
+      display: flex;
+    }
+    li {
+      list-style: none;
+    }
+  }
+}

@@ -2,9 +2,8 @@ import type {
   CheckInFull,
   CheckInWithFullName,
   NewCheckInEntry,
-  Team,
   TeamDataFull,
-  User,
+  UserLite,
 } from 'shared';
 import { CheckInEntry } from '../components/CheckInEntry';
 import './team.css';
@@ -47,10 +46,10 @@ export default function TeamRoute() {
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
   const [team, setTeam] = useState<TeamDataFull | null>(null);
-  const [hasCheckedInToday, setHasCheckedInToday] = useState(false);
+  const [hasCheckedInToday] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const { id: teamId } = useParams<TeamRouteParams>();
-  const { date, setTeamQueryParams } = useTeamQueryParams();
+  const { date } = useTeamQueryParams();
 
   useEffect(() => {
     if (!team && teamId) {
@@ -135,22 +134,22 @@ export default function TeamRoute() {
       <section className="team-members">
         <h2>Team members</h2>
         <ul>
-          {team?.members.map((member) => {
+          {team?.members.map((member: UserLite) => {
             return <li> {member.fullName}</li>;
           })}
         </ul>
       </section>
       <section className="latest-checkins">
         <h2>Latest Checkins</h2>
-        {team?.latestCheckIns.map((checkIn) => {
+        {team?.latestCheckIns.map((checkIn: CheckInWithFullName) => {
           return <CheckInEntry entry={checkIn} />;
         })}
       </section>
       <dialog ref={dialogRef}>
         {team && user && (
           <CheckInForm
-            userId={user._id.toString()}
-            teamId={team._id.toString()}
+            userId={user?._id?.toString() || ''}
+            teamId={team?._id?.toString() || ''}
             closeCheckInForm={closeCheckInForm}
             addNewCheckIn={addNewCheckIn}
           />

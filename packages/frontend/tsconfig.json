@@ -21,7 +21,9 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"] // or ["*"] if aliasing root
+      "~/*": ["src/*"],
+      "shared": ["../shared/src"],
+      "shared/*": ["../shared/src/*"]
     }
   },
   "include": ["public", "index.html", "tests", "src"],

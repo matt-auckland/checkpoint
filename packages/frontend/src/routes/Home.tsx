@@ -3,13 +3,13 @@ import './home.css';
 import { AppButton } from '../components/AppButton';
 import { teamAPI } from '../lib/api/teamAPI';
 import { Link, useNavigate } from 'react-router-dom';
-import type { TeamLite, User, UserLite } from 'shared';
+import type { TeamLite, UserLite } from 'shared';
 import { usePageTitle } from '~/context/PageTitleContext';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-type UserTeamWithCheckInStatus = TeamLite & {
-  hasCheckedInToday: boolean;
-};
+// type UserTeamWithCheckInStatus = TeamLite & {
+//   hasCheckedInToday: boolean;
+// };
 
 // function getTeamCheckInStatus(user: User): UserTeamWithCheckInStatus[] {
 //   const recentCheckIns = user.recentCheckIns || []
@@ -30,7 +30,7 @@ export default function Home() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
   const { setTitle } = usePageTitle();
-  const [userTeams, setUserTeams] = useState<UserTeamWithCheckInStatus[]>([]);
+  // const [userTeams, setUserTeams] = useState<UserTeamWithCheckInStatus[]>([]);
 
   useEffect(() => {
     const displayName = user?.fullName.split(' ')[0] || user?.fullName;

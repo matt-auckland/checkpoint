@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { usePageTitle } from '~/context/PageTitleContext';
+import './teamSettings.css';
 
 export default function TeamSettingsRoute() {
   const [searchParams] = useSearchParams();
