@@ -1,7 +1,6 @@
 import { getAuthToken } from '../tokenStorage';
 
-// TODO get API_BASE from env
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = import.meta.env.BASE_URL || 'http://localhost:3000/api';
 
 type RequestOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
