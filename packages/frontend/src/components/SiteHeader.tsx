@@ -15,13 +15,6 @@ export function SiteHeader() {
 
         {isLoggedIn && <UserAvatar user={user} showName />}
       </header>
-      <div>
-        <Link to={'/login'}>login</Link>
-        <Link to={'/signup'}>signup</Link>
-        <Link to={'/team/123'}>team</Link>
-        <Link to={'/team/123?date&userId'}>team standup</Link>
-        <Link to={'/team/123/settings'}>team settings</Link>
-      </div>
     </>
   );
 }

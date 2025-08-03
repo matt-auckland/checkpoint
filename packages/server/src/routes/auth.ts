@@ -4,6 +4,7 @@ import type {
   AuthLoginAPI,
   AuthLogoutAPI,
   AuthSignupAPI,
+  CheckInFull,
   NewUser,
   TeamLite,
   User,
@@ -94,12 +95,21 @@ export async function authAPIRoutes(fastify: FastifyInstance) {
       email
     )) as User;
 
+    const userId = user._id?.toString()
     const teams = (await collections.team?.collection
-      .find({ memberIds: user._id?.toString() })
+      .find({ 'members._id': userId })
       .project({ _id: 1, name: 1 })
       .toArray()) as TeamLite[];
 
     user.teams = teams;
+
+    const recentCheckIns = (await collections.checkIn?.collection
+      .find({ userId: userId })
+      .sort({ createdAt: -1 })  
+      .toArray()
+    ) as CheckInFull[]
+
+    user.recentCheckIns = recentCheckIns
 
     if (!user) {
       reply.code(500).send({

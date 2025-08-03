@@ -12,8 +12,7 @@ import {
 
 type DbCollections = {
   user?: CollectionWrapper;
-  standup?: CollectionWrapper;
-  standupEntry?: CollectionWrapper;
+  checkIn?: CollectionWrapper;
   team?: CollectionWrapper;
 };
 
@@ -23,8 +22,7 @@ const dbDefaults = {
   uri: '',
   USER_COLLECTION_NAME: '',
   TEAM_COLLECTION_NAME: '',
-  STANDUP_COLLECTION_NAME: '',
-  STANDUP_ENTRY_COLLECTION_NAME: '',
+  CHECKIN_COLLECTION_NAME: '',
 };
 
 export async function connectToDB(): Promise<void> {
@@ -33,6 +31,7 @@ export async function connectToDB(): Promise<void> {
 
     const uri = process.env.MONGO_DB_URI;
     const dbName = process.env.DB_NAME;
+    console.log('Using db name:', dbName);
     const client = new MongoClient(uri || dbDefaults.uri);
     await client.connect();
 
@@ -47,16 +46,10 @@ export async function connectToDB(): Promise<void> {
     );
     collections.team = new CollectionWrapper(teamCollection);
 
-    const standupCollection = db.collection(
-      envData.STANDUP_COLLECTION_NAME || dbDefaults.STANDUP_COLLECTION_NAME
+    const checkInCollection = db.collection(
+      envData.CHECKIN_COLLECTION_NAME || dbDefaults.CHECKIN_COLLECTION_NAME
     );
-    collections.standup = new CollectionWrapper(standupCollection);
-
-    const standupEntryCollection = db.collection(
-      envData.STANDUP_ENTRY_COLLECTION_NAME ||
-        dbDefaults.STANDUP_ENTRY_COLLECTION_NAME
-    );
-    collections.standupEntry = new CollectionWrapper(standupEntryCollection);
+    collections.checkIn = new CollectionWrapper(checkInCollection);
 
     console.log('connected to mongodb successfully');
   } catch (e) {

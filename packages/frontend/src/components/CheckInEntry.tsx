@@ -1,24 +1,25 @@
-import type { CheckInEntryWithName, UserLite } from 'shared';
+import type { CheckInWithFullName, UserLite } from 'shared';
 import { UserAvatar } from './UserAvatar';
-import './standupEntry.css';
+import './checkinEntry.css';
 
-type StandUpEntryProps = {
-  entry: CheckInEntryWithName;
+type CheckInEntryProps = {
+  entry: CheckInWithFullName;
 };
 
-export function StandUpEntry({ entry }: StandUpEntryProps) {
+export function CheckInEntry({ entry }: CheckInEntryProps) {
   const user: UserLite = {
     _id: entry.userId,
     fullName: entry.fullName,
   };
 
+  console.log(entry);
   return (
-    <article className="standup-entry">
+    <article className="checkin-entry">
       <div className="top-section">
         <UserAvatar user={user} />
         <span>{user.fullName}</span>
         <span>
-          {new Date(entry.date).toLocaleDateString('en-NZ', {
+          {new Date(entry.createdAt).toLocaleDateString('en-NZ', {
             year: 'numeric',
             month: 'numeric',
             day: 'numeric',

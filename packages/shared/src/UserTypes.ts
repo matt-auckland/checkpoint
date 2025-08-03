@@ -1,15 +1,15 @@
 import type { ObjectId } from 'mongodb';
-import { type StandupEntryFull } from './StandupTypes';
 import type { Team, TeamLite } from './TeamTypes';
+import type { CheckInFull } from './CheckinTypes';
 
 export type User = {
-  _id?: ObjectId;
+  _id: ObjectId;
   email: string;
   fullName: string;
   settings: UserSettings;
   teams: TeamLite[];
-  recentStandups?: StandupEntryFull[];
-  standupHistory?: StandupEntryFull[];
+  recentCheckIns?: CheckInFull[];
+  checkInHistory?: CheckInFull[];
 };
 
 export type NewUser = Omit<User, '_id'>;

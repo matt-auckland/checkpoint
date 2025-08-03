@@ -1,6 +1,7 @@
 import type {
   Team,
   TeamCreateAPI,
+  TeamDataFull,
   TeamUpdateSingleAPI,
   UserLite,
 } from 'shared';
@@ -11,7 +12,14 @@ export const teamAPI = {
     get: () => api('/team', { method: 'GET' }) as Promise<Team[]>,
   },
   one: {
-    get: (id: string) => api(`/team/${id}`, { method: 'GET' }) as Promise<Team>,
+    get: (id: string, date?: string) => {
+      let url = `/team/${id}`;
+      if (date) {
+        url += `?date=${date}`;
+      }
+      return api(url, { method: 'GET' }) as Promise<TeamDataFull>;
+    },
+
     updateTeam: (id: string, data: TeamUpdateSingleAPI['Body']) =>
       api(`/team/${id}/entry`, {
         method: 'PATCH',

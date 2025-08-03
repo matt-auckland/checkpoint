@@ -4,10 +4,35 @@
   }
   display: flex;
 
-  gap: 3rem;
+  gap: 1rem;
   flex-wrap: wrap;
 
+  header {
+    display: flex;
+    gap: 2rem;
+  }
+
   section {
+    text-align: left;
     min-width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    h2 {
+      width: 100%;
+      /* display: block; */
+      /* flex-grow: 1; */
+    }
+  }
+
+  .team-members {
+    width: 100%;
+    text-align: left;
+    ul {
+      display: flex;
+    }
+    li {
+      list-style: none;
+    }
   }
 }

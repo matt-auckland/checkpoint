@@ -1,4 +1,3 @@
-// import type { Route } from './+types/SignUp';
 import { useEffect, useState } from 'react';
 import './signup.css';
 import { useAuth } from '../context/AuthContext.tsx';

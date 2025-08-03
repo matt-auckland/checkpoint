@@ -3,14 +3,34 @@ import './home.css';
 import { AppButton } from '../components/AppButton';
 import { teamAPI } from '../lib/api/teamAPI';
 import { Link, useNavigate } from 'react-router-dom';
-import type { TeamLite, UserLite } from 'shared';
+import type { TeamLite, User, UserLite } from 'shared';
 import { usePageTitle } from '~/context/PageTitleContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+type UserTeamWithCheckInStatus = TeamLite & {
+  hasCheckedInToday: boolean;
+};
+
+// function getTeamCheckInStatus(user: User): UserTeamWithCheckInStatus[] {
+//   const recentCheckIns = user.recentCheckIns || []
+//   const teams = user.teams
+//   const now = new Date();
+
+//   const startOfTodayUTC = new Date(
+//     Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
+//   );
+
+//   const updatedTeams: UserTeamWithCheckInStatus = teams.map(team => {
+//     recentCheckIns.find(ci => ci.createdAt)
+//   })
+//   return updatedTeams
+// }
 
 export default function Home() {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
   const { setTitle } = usePageTitle();
+  const [userTeams, setUserTeams] = useState<UserTeamWithCheckInStatus[]>([]);
 
   useEffect(() => {
     const displayName = user?.fullName.split(' ')[0] || user?.fullName;
@@ -62,7 +82,7 @@ export default function Home() {
       </section>
       <section>
         <h2>Recent Check Ins</h2>
-        {user?.recentStandups?.length
+        {user?.recentCheckIns?.length
           ? 'You have some!'
           : "You haven't checked in before!"}
       </section>
