@@ -21,7 +21,7 @@ await app.register(fastifyCors, {
 await connectToDB();
 app.register(apiRoutes, { prefix: '/api' });
 
-app.listen({ port: PORT }, (err, address) => {
+app.listen({ port: PORT , host: '0.0.0.0'}, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
