@@ -1,5 +1,7 @@
 # Checkpoint
 
+Running on https://checkpoint-mp.netlify.app/
+
 ## Setup
 
 ### Prerequisites
