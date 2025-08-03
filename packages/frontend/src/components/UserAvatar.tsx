@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './UserAvatar.css';
+import './userAvatar.css';
 import type { User, UserLite } from 'shared';
 
 type UserAvatarProps = {
@@ -16,11 +16,11 @@ export function UserAvatar({ user, showName = false }: UserAvatarProps) {
     .join('');
 
   return (
-    <Link to={`/user/${user?._id}`}>
-      <div className="user-avatar">
-        <span className="avatar-circle">{profileInitials}</span>
+    <div className="user-avatar">
+      <span className="avatar-circle">{profileInitials}</span>
+      <Link to={`/user/${user?._id}`}>
         {showName && <span className="user-first-name">{firstName}</span>}
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
